@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LINK｜大分発のマーキング専門店</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Noto+Sans+JP:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1a18;
+    --ink-light: #4a4a46;
+    --cream: #f5f3ee;
+    --warm: #e8e4db;
+    --accent: #2c4a3e;
+    --accent-light: #4a7c6a;
+    --gold: #b8965a;
+    --white: #fafaf8;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 3rem;
+    background: rgba(245,243,238,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 0.5px solid rgba(26,26,24,0.1);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem; letter-spacing: 0.15em;
+    color: var(--ink); text-decoration: none;
+  }
+  .nav-logo span { color: var(--accent); }
+  nav ul { list-style: none; display: flex; gap: 2.5rem; }
+  nav a {
+    font-size: 0.72rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ink-light);
+    text-decoration: none; transition: color 0.2s;
+  }
+  nav a:hover { color: var(--accent); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    padding-top: 5rem;
+    overflow: hidden;
+  }
+  .hero-text {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 5rem 4rem 5rem 5rem;
+  }
+  .hero-eyebrow {
+    font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .hero-eyebrow::after {
+    content: ''; display: block; width: 40px; height: 0.5px; background: var(--accent);
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
+    font-weight: 300; line-height: 1.1;
+    margin-bottom: 2rem; letter-spacing: -0.01em;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero-body {
+    font-size: 0.9rem; line-height: 1.9; color: var(--ink-light);
+    max-width: 420px; margin-bottom: 3rem;
+  }
+  .hero-cta {
+    display: flex; gap: 1rem; align-items: center;
+  }
+  .btn-primary {
+    display: inline-block; padding: 0.85rem 2.2rem;
+    background: var(--accent); color: var(--white);
+    font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+    text-decoration: none; transition: background 0.25s;
+    border: none; cursor: pointer;
+  }
+  .btn-primary:hover { background: var(--accent-light); }
+  .btn-outline {
+    display: inline-block; padding: 0.85rem 2.2rem;
+    border: 0.5px solid var(--ink); color: var(--ink);
+    font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+    text-decoration: none; transition: all 0.25s;
+  }
+  .btn-outline:hover { background: var(--ink); color: var(--white); }
+
+  .hero-visual {
+    position: relative; overflow: hidden;
+    background: var(--accent);
+  }
+  .hero-visual-inner {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 3rem;
+  }
+  .hero-pattern {
+    position: absolute; inset: 0;
+    opacity: 0.06;
+    background-image: repeating-linear-gradient(
+      45deg, #fff 0, #fff 1px, transparent 0, transparent 50%
+    );
+    background-size: 30px 30px;
+  }
+  .hero-tag {
+    position: relative; z-index: 1;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4rem, 8vw, 8rem);
+    font-weight: 300; color: rgba(255,255,255,0.12);
+    line-height: 1; letter-spacing: -0.02em;
+    user-select: none;
+  }
+  .hero-caption {
+    position: relative; z-index: 1;
+    font-size: 0.75rem; letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.7); text-transform: uppercase;
+    margin-top: 1.5rem;
+    border-top: 0.5px solid rgba(255,255,255,0.2);
+    padding-top: 1rem;
+  }
+  .hero-scroll {
+    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--ink-light); display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  }
+  .scroll-line {
+    width: 0.5px; height: 40px; background: var(--ink-light);
+    animation: scrolldown 1.8s ease-in-out infinite;
+  }
+  @keyframes scrolldown {
+    0%,100% { transform: scaleY(0); transform-origin: top; }
+    50% { transform: scaleY(1); transform-origin: top; }
+  }
+
+  /* ─── SECTION BASE ─── */
+  section { padding: 7rem 5rem; }
+  .section-label {
+    font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .section-label::before {
+    content: ''; display: block; width: 24px; height: 0.5px; background: var(--accent);
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 300; line-height: 1.2; margin-bottom: 1rem;
+  }
+  .section-sub {
+    font-size: 0.88rem; color: var(--ink-light); line-height: 1.8;
+    max-width: 560px;
+  }
+
+  /* ─── ABOUT ─── */
+  #about { background: var(--white); }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: center; margin-top: 4rem;
+  }
+  .about-stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+    margin-top: 3rem;
+  }
+  .stat {
+    background: var(--cream); padding: 1.5rem;
+  }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.8rem; color: var(--accent); letter-spacing: 0.05em;
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.72rem; color: var(--ink-light); margin-top: 0.3rem;
+    letter-spacing: 0.06em;
+  }
+  .about-visual {
+    position: relative;
+  }
+  .about-box {
+    background: var(--accent); padding: 3.5rem;
+    position: relative; overflow: hidden;
+  }
+  .about-box-pattern {
+    position: absolute; inset: 0; opacity: 0.05;
+    background-image: repeating-linear-gradient(
+      0deg, #fff 0, #fff 1px, transparent 0, transparent 20px
+    );
+  }
+  .about-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-style: italic;
+    color: var(--white); line-height: 1.6;
+    position: relative; z-index: 1;
+  }
+  .about-quote-author {
+    font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: rgba(255,255,255,0.5); margin-top: 1.5rem;
+    position: relative; z-index: 1;
+  }
+  .about-tag {
+    position: absolute; bottom: -1.5rem; right: -1rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 6rem; color: rgba(0,0,0,0.06);
+    line-height: 1; user-select: none; z-index: 0;
+  }
+
+  /* ─── SERVICES ─── */
+  #services { background: var(--cream); }
+  .services-header { max-width: 600px; margin-bottom: 4rem; }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: rgba(26,26,24,0.1);
+    border: 1px solid rgba(26,26,24,0.1);
+  }
+  .service-card {
+    background: var(--white); padding: 2.5rem 2rem;
+    transition: background 0.25s;
+    position: relative; overflow: hidden;
+  }
+  .service-card:hover { background: var(--cream); }
+  .service-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.5rem; color: rgba(26,26,24,0.06);
+    line-height: 1; margin-bottom: 1rem;
+    user-select: none;
+  }
+  .service-icon {
+    width: 36px; height: 36px; margin-bottom: 1.2rem;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .service-icon svg { width: 28px; height: 28px; stroke: var(--accent); fill: none; stroke-width: 1.2; }
+  .service-name {
+    font-size: 0.95rem; font-weight: 500; margin-bottom: 0.8rem;
+    letter-spacing: 0.04em;
+  }
+  .service-desc {
+    font-size: 0.8rem; color: var(--ink-light); line-height: 1.85;
+  }
+  .service-tag {
+    display: inline-block; margin-top: 1.2rem;
+    font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--accent); border-bottom: 0.5px solid var(--accent);
+    padding-bottom: 1px;
+  }
+
+  /* ─── M&LEE BRAND ─── */
+  #mandlee {
+    background: var(--ink);
+    color: var(--white);
+    position: relative; overflow: hidden;
+  }
+  .mandlee-bg-text {
+    position: absolute; top: -2rem; right: -2rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22vw; color: rgba(255,255,255,0.025);
+    line-height: 1; user-select: none; pointer-events: none;
+    white-space: nowrap;
+  }
+  .mandlee-inner {
+    position: relative; z-index: 1;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
+  }
+  .mandlee-label { color: var(--gold); }
+  .mandlee-label::before { background: var(--gold); }
+  .mandlee-title { color: var(--white); }
+  .mandlee-body {
+    font-size: 0.88rem; color: rgba(255,255,255,0.55); line-height: 1.9;
+    margin-top: 1.5rem;
+  }
+  .mandlee-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-style: italic;
+    color: var(--gold); margin: 2rem 0;
+  }
+  .mandlee-links { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 2.5rem; }
+  .mandlee-link {
+    display: flex; align-items: center; gap: 1rem;
+    font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--white); text-decoration: none;
+    padding: 0.85rem 1.2rem;
+    border: 0.5px solid rgba(255,255,255,0.15);
+    transition: all 0.25s;
+  }
+  .mandlee-link:hover {
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(255,255,255,0.3);
+  }
+  .mandlee-link-icon { font-size: 1rem; }
+  .mandlee-link-arrow { margin-left: auto; opacity: 0.4; }
+  .mandlee-products {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+    background: rgba(255,255,255,0.06);
+  }
+  .mandlee-product {
+    background: rgba(255,255,255,0.02); padding: 1.8rem 1.5rem;
+    transition: background 0.25s;
+  }
+  .mandlee-product:hover { background: rgba(255,255,255,0.05); }
+  .mandlee-product-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem; color: var(--white); margin-bottom: 0.4rem;
+  }
+  .mandlee-product-price {
+    font-size: 0.8rem; color: var(--gold); letter-spacing: 0.08em;
+  }
+  .mandlee-product-copy {
+    font-size: 0.72rem; color: rgba(255,255,255,0.4);
+    margin-top: 0.5rem; line-height: 1.6;
+  }
+
+  /* ─── CLIENTS ─── */
+  #clients { background: var(--white); }
+  .clients-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: rgba(26,26,24,0.08);
+    border: 1px solid rgba(26,26,24,0.08);
+    margin-top: 4rem;
+  }
+  .client-card {
+    background: var(--white); padding: 2rem 1.8rem;
+  }
+  .client-type {
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.6rem;
+  }
+  .client-name {
+    font-size: 1rem; font-weight: 500; margin-bottom: 0.7rem;
+  }
+  .client-desc {
+    font-size: 0.78rem; color: var(--ink-light); line-height: 1.8;
+  }
+
+  /* ─── FLOW ─── */
+  #flow { background: var(--cream); }
+  .flow-steps {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    gap: 0; margin-top: 4rem; position: relative;
+  }
+  .flow-steps::before {
+    content: ''; position: absolute; top: 1.8rem; left: 10%; right: 10%;
+    height: 0.5px; background: rgba(26,26,24,0.15); z-index: 0;
+  }
+  .flow-step { text-align: center; padding: 0 1rem; position: relative; z-index: 1; }
+  .flow-num {
+    width: 3.5rem; height: 3.5rem; border-radius: 50%;
+    background: var(--white); border: 0.5px solid rgba(26,26,24,0.15);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.2rem;
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem;
+    color: var(--accent); letter-spacing: 0.05em;
+  }
+  .flow-label {
+    font-size: 0.82rem; font-weight: 500; margin-bottom: 0.5rem;
+  }
+  .flow-desc {
+    font-size: 0.72rem; color: var(--ink-light); line-height: 1.7;
+  }
+
+  /* ─── SNS ─── */
+  #sns {
+    background: var(--cream); padding: 5rem;
+    text-align: center;
+  }
+  .sns-icons {
+    display: flex; justify-content: center; gap: 1.5rem; margin-top: 3rem;
+  }
+  .sns-icon {
+    display: flex; align-items: center; gap: 0.6rem;
+    font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink); text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border: 0.5px solid rgba(26,26,24,0.2);
+    transition: all 0.25s;
+  }
+  .sns-icon:hover { background: var(--ink); color: var(--white); }
+
+  /* ─── CONTACT ─── */
+  #contact {
+    background: var(--accent); color: var(--white);
+    text-align: center; padding: 7rem 5rem;
+    position: relative; overflow: hidden;
+  }
+  .contact-bg {
+    position: absolute; inset: 0; opacity: 0.04;
+    background-image: repeating-linear-gradient(
+      90deg, #fff 0, #fff 1px, transparent 0, transparent 40px
+    ), repeating-linear-gradient(
+      0deg, #fff 0, #fff 1px, transparent 0, transparent 40px
+    );
+  }
+  .contact-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 300; color: var(--white); margin-bottom: 1rem;
+    position: relative; z-index: 1;
+  }
+  .contact-body {
+    font-size: 0.88rem; color: rgba(255,255,255,0.65); line-height: 1.8;
+    max-width: 480px; margin: 0 auto 3rem;
+    position: relative; z-index: 1;
+  }
+  .contact-btn {
+    display: inline-block; padding: 1rem 3rem;
+    background: var(--white); color: var(--accent);
+    font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase;
+    text-decoration: none; transition: all 0.25s;
+    position: relative; z-index: 1;
+    font-weight: 500;
+  }
+  .contact-btn:hover { background: var(--cream); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--ink); color: rgba(255,255,255,0.4);
+    padding: 3rem 5rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem; letter-spacing: 0.15em; color: var(--white);
+  }
+  .footer-copy { font-size: 0.72rem; letter-spacing: 0.06em; }
+
+  /* ─── ANIMATIONS ─── */
+  .fade-in {
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    nav ul { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-visual { min-height: 40vh; }
+    .hero-text { padding: 3rem 2rem; }
+    section { padding: 4rem 2rem; }
+    .about-grid, .mandlee-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .services-grid, .clients-grid { grid-template-columns: 1fr; }
+    .flow-steps { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .flow-steps::before { display: none; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+    #sns { padding: 4rem 2rem; }
+    #contact { padding: 5rem 2rem; }
+    .mandlee-products { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">LI<span>N</span>K</a>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#mandlee">M&Lee</a></li>
+    <li><a href="#flow">Flow</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <p class="hero-eyebrow">大分発のマーキング専門店</p>
+    <h1>想いを形に、<br><em>つながりを</em><br>デザインする。</h1>
+    <p class="hero-body">
+      Tシャツ・ブルゾン・のぼり・横断幕など、オリジナルグッズの企画から加工まで一貫してお任せください。大分県を拠点に、地域の「つながり」と「出発」を支えます。
+    </p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary">お問い合わせ</a>
+      <a href="#services" class="btn-outline">サービスを見る</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-pattern"></div>
+    <div class="hero-visual-inner">
+      <div class="hero-tag">LINK</div>
+      <p class="hero-caption">Marking × Design × Connection — Oita, Japan</p>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid fade-in">
+    <div>
+      <p class="section-label">About LINK</p>
+      <h2 class="section-title">「目に見えない価値」を<br>大切にする制作集団。</h2>
+      <p class="section-sub" style="margin-top:1rem">
+        単なる制作代行ではなく、お客様の課題から逆算した商品企画やデザイン提案を行います。1点からの小ロット対応、地域密着型の安心感で大分県内での信頼を構築しています。
+      </p>
+      <div class="about-stats">
+        <div class="stat">
+          <div class="stat-num">1<span style="font-size:1.5rem">点〜</span></div>
+          <div class="stat-label">小ロット対応</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">70<span style="font-size:1.5rem">%</span></div>
+          <div class="stat-label">官公庁・団体取引</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num" style="font-size:1.8rem">大分</div>
+          <div class="stat-label">県全域 対応</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num" style="font-size:1.4rem">kintone</div>
+          <div class="stat-label">業務内製管理</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-visual">
+      <div class="about-box">
+        <div class="about-box-pattern"></div>
+        <p class="about-quote">
+          「つながり」と「出発」を込めた屋号のように、お客様の新たなスタートに寄り添うグッズを届けたい。
+        </p>
+        <p class="about-quote-author">— LINK 代表より</p>
+      </div>
+      <div class="about-tag">LINK</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header fade-in">
+    <p class="section-label">Services</p>
+    <h2 class="section-title">取り扱いサービス</h2>
+    <p class="section-sub">企画・デザイン・マーキング加工まで、ワンストップでお対応します。</p>
+  </div>
+  <div class="services-grid fade-in">
+    <div class="service-card">
+      <div class="service-num">01</div>
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </div>
+      <div class="service-name">オリジナルTシャツ・ウェア</div>
+      <div class="service-desc">部活・イベント・ユニフォームなど、1枚からご注文可能。Illustratorによるデザインデータのトレースやロゴ作成にも対応。</div>
+      <span class="service-tag">小ロット対応</span>
+    </div>
+    <div class="service-card">
+      <div class="service-num">02</div>
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      </div>
+      <div class="service-name">のぼり・横断幕・バナー</div>
+      <div class="service-desc">屋外使用に耐えうる高品質素材（ポリ葛城等）を使用。祭り・スポーツ大会・店舗販促など幅広い用途に対応します。</div>
+      <span class="service-tag">耐候素材使用</span>
+    </div>
+    <div class="service-card">
+      <div class="service-num">03</div>
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+      </div>
+      <div class="service-name">記念品・ノベルティ</div>
+      <div class="service-desc">周年記念・卒業・表彰など、特別なシーンに寄り添う記念品を企画からご提案。官公庁・団体様の大量発注も歓迎。</div>
+      <span class="service-tag">企画提案あり</span>
+    </div>
+    <div class="service-card">
+      <div class="service-num">04</div>
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </div>
+      <div class="service-name">デザイン制作・ロゴ作成</div>
+      <div class="service-desc">Illustratorを用いた精密なトレース・ロゴデザインに定評があります。データ入稿からご相談まで柔軟に対応。</div>
+      <span class="service-tag">Illustrator対応</span>
+    </div>
+    <div class="service-card">
+      <div class="service-num">05</div>
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <div class="service-name">PTA・部活・地域イベント</div>
+      <div class="service-desc">学校PTA・スポーツ少年団・地元祭りなどの少量ニーズにも丁寧に対応。予算に合わせた最適プランをご提案します。</div>
+      <span class="service-tag">地域密着</span>
+    </div>
+    <div class="service-card">
+      <div class="service-num">06</div>
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
+      <div class="service-name">法人・店舗向けブランディング</div>
+      <div class="service-desc">中小企業の広報担当者・店舗オーナー向けに、ユニフォームから販促物までブランドの一貫性を保った提案が可能。</div>
+      <span class="service-tag">一括対応</span>
+    </div>
+  </div>
+</section>
+
+<!-- M&LEE BRAND -->
+<section id="mandlee">
+  <div class="mandlee-bg-text">M&LEE</div>
+  <div class="mandlee-inner">
+    <div class="fade-in">
+      <p class="section-label mandlee-label">Brand by LINK</p>
+      <h2 class="section-title mandlee-title">M&Lee — <br>あなたの今に<br>寄り添う一着。</h2>
+      <p class="mandlee-tagline">For your ever-changing moods.</p>
+      <p class="mandlee-body">
+        LINKが手がけるオリジナルアパレルブランド「M&Lee」。砂時計をモチーフに、流れゆく時間のなかで揺れ動く感情に寄り添うウェアをつくっています。喜びも迷いも全てが、今の自分を作る瞬間。
+      </p>
+      <div class="mandlee-links">
+        <a href="https://mandlee.base.shop/" target="_blank" class="mandlee-link">
+          <span class="mandlee-link-icon">🛍</span>
+          <span>ECサイトで購入する — mandlee.base.shop</span>
+          <span class="mandlee-link-arrow">↗</span>
+        </a>
+        <a href="https://www.instagram.com/mandlee_official/" target="_blank" class="mandlee-link">
+          <span class="mandlee-link-icon">📷</span>
+          <span>Instagram @mandlee_official</span>
+          <span class="mandlee-link-arrow">↗</span>
+        </a>
+        <a href="https://www.instagram.com/link_official_01/" target="_blank" class="mandlee-link">
+          <span class="mandlee-link-icon">📷</span>
+          <span>Instagram @link_official_01</span>
+          <span class="mandlee-link-arrow">↗</span>
+        </a>
+      </div>
+    </div>
+    <div class="fade-in">
+      <div class="mandlee-products">
+        <div class="mandlee-product">
+          <div class="mandlee-product-name">M&Lee Graphic Sweat</div>
+          <div class="mandlee-product-price">¥7,700</div>
+          <div class="mandlee-product-copy">流れゆく季節の中で、沈んでいきそうになった時は流れる時間に身を任せてみて。</div>
+        </div>
+        <div class="mandlee-product">
+          <div class="mandlee-product-name">Hourglass Logo Zip Hoodie</div>
+          <div class="mandlee-product-price">¥10,450</div>
+          <div class="mandlee-product-copy">砂時計モチーフのオリジナルロゴ。ダブルジップでシルエットのアレンジが可能。</div>
+        </div>
+        <div class="mandlee-product">
+          <div class="mandlee-product-name">Graphic Drawcord Hem T-shirt</div>
+          <div class="mandlee-product-price">¥5,500</div>
+          <div class="mandlee-product-copy">静けさの中に動きを感じるTシャツ。裾のドローコードでシルエット変化も。</div>
+        </div>
+        <div class="mandlee-product">
+          <div class="mandlee-product-name">M&Lee Logo Cap</div>
+          <div class="mandlee-product-price">¥4,250</div>
+          <div class="mandlee-product-copy">砂時計モチーフのミニマル刺繍キャップ。ゴールド金具がさりげないアクセント。</div>
+        </div>
+      </div>
+      <a href="https://mandlee.base.shop/" target="_blank" class="btn-primary" style="display:block;text-align:center;margin-top:1px;padding:1.2rem">すべての商品を見る ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTS -->
+<section id="clients">
+  <div class="fade-in">
+    <p class="section-label">Clients</p>
+    <h2 class="section-title">お取引先・対象のお客様</h2>
+  </div>
+  <div class="clients-grid fade-in">
+    <div class="client-card">
+      <div class="client-type">Public Sector</div>
+      <div class="client-name">官公庁・自治体・団体</div>
+      <div class="client-desc">現在の売上の約70%を占める主力取引先。周年記念品・イベントグッズ・ユニフォームなど、品質と信頼性を重視したご提案が可能です。</div>
+    </div>
+    <div class="client-card">
+      <div class="client-type">Community</div>
+      <div class="client-name">学校・部活・PTA・地域行事</div>
+      <div class="client-desc">スポーツ少年団・文化部・地元の祭りやイベント主催者。少ロット・低予算でも丁寧に対応します。</div>
+    </div>
+    <div class="client-card">
+      <div class="client-type">Private</div>
+      <div class="client-name">中小企業・店舗・個人</div>
+      <div class="client-desc">ブランド強化を目指す中小企業の広報担当者・店舗オーナー・個人事業主。ノベルティから販促物まで一括対応。</div>
+    </div>
+  </div>
+</section>
+
+<!-- FLOW -->
+<section id="flow">
+  <div class="fade-in">
+    <p class="section-label">Flow</p>
+    <h2 class="section-title">ご依頼の流れ</h2>
+  </div>
+  <div class="flow-steps fade-in">
+    <div class="flow-step">
+      <div class="flow-num">01</div>
+      <div class="flow-label">お問い合わせ</div>
+      <div class="flow-desc">フォームまたはInstagramのDMからお気軽にご連絡ください。</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">02</div>
+      <div class="flow-label">ヒアリング・企画</div>
+      <div class="flow-desc">ご要望・用途・予算を伺い、最適な商品・デザインをご提案します。</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">03</div>
+      <div class="flow-label">デザイン確認</div>
+      <div class="flow-desc">デザインデータをご確認いただき、修正対応後に制作確定。</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">04</div>
+      <div class="flow-label">制作・加工</div>
+      <div class="flow-desc">マーキング加工・縫製などを一貫して対応。品質チェック済みでお届け。</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">05</div>
+      <div class="flow-label">納品</div>
+      <div class="flow-desc">配送または直接お届け。大量注文も分納に柔軟対応いたします。</div>
+    </div>
+  </div>
+</section>
+
+<!-- SNS -->
+<section id="sns">
+  <p class="section-label" style="justify-content:center">Follow Us</p>
+  <h2 class="section-title" style="text-align:center">制作実績・最新情報はSNSで</h2>
+  <p class="section-sub" style="margin:0.8rem auto 0;text-align:center">Instagramでは制作事例やお客様の声を随時発信しています。</p>
+  <div class="sns-icons">
+    <a href="https://www.instagram.com/link_official_01/" target="_blank" class="sns-icon">📷 LINK @link_official_01</a>
+    <a href="https://www.instagram.com/mandlee_official/" target="_blank" class="sns-icon">📷 M&Lee @mandlee_official</a>
+    <a href="https://mandlee.base.shop/" target="_blank" class="sns-icon">🛍 M&Lee EC Shop</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-bg"></div>
+  <h2 class="contact-title">まずはお気軽に<br>ご相談ください。</h2>
+  <p class="contact-body">
+    1点からのオーダー、デザインのご相談、見積もりのみのお問い合わせも大歓迎です。大分県内であれば直接お伺いすることも可能です。
+  </p>
+  <a href="mailto:info@link-oita.jp" class="contact-btn">お問い合わせフォームへ</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">LINK</div>
+  <div class="footer-copy">© 2025 LINK — 大分発のマーキング専門店. All rights reserved.</div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
