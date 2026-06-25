@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M&Lee 撮影タイムスケジュール — 2026.06.27</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #FBFAF7;
+    --paper: #FFFFFF;
+    --ink: #1F1D1A;
+    --ink-soft: #5C564E;
+    --line: #E4DFD5;
+    --accent: #8B7355;     /* LINK brown */
+    --accent-soft: #F0E9DD;
+    --green: #5E7C5E;      /* M&Lee green */
+    --green-soft: #E8EFE7;
+    --warn: #B5564B;
+    --warn-soft: #F8E9E6;
+  }
+
+  body {
+    font-family: 'Zen Kaku Gothic New', 'Hiragino Kaku Gothic ProN', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    padding: 32px 16px 80px;
+  }
+  .en { font-family: 'Cormorant Garamond', serif; letter-spacing: .04em; }
+
+  .sheet {
+    max-width: 840px;
+    margin: 0 auto;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  /* ── Header ── */
+  header {
+    padding: 34px 40px 28px;
+    border-bottom: 2px solid var(--ink);
+    position: relative;
+  }
+  .kicker {
+    font-size: 11px; letter-spacing: .28em; text-transform: uppercase;
+    color: var(--accent); font-weight: 500; margin-bottom: 10px;
+  }
+  header h1 {
+    font-size: 27px; font-weight: 700; letter-spacing: .02em; line-height: 1.3;
+  }
+  .meta {
+    display: flex; flex-wrap: wrap; gap: 8px 28px; margin-top: 16px;
+  }
+  .meta div { font-size: 13.5px; }
+  .meta .lbl { color: var(--ink-soft); font-weight: 500; margin-right: 8px; font-size: 11px; letter-spacing:.08em; }
+  .meta .val { font-weight: 700; }
+  .date-badge {
+    position: absolute; top: 30px; right: 40px; text-align: right;
+  }
+  .date-badge .d { font-size: 34px; font-weight: 700; line-height: 1; }
+  .date-badge .w { font-size: 12px; color: var(--ink-soft); letter-spacing:.1em; margin-top:4px; }
+
+  /* ── Section base ── */
+  section { padding: 26px 40px; border-bottom: 1px solid var(--line); }
+  .sec-title {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 13px; letter-spacing: .14em; font-weight: 700;
+    text-transform: uppercase; color: var(--ink); margin-bottom: 18px;
+  }
+  .sec-title::before {
+    content: ''; width: 16px; height: 2px; background: var(--accent);
+  }
+
+  /* ── Timeline ── */
+  .block-label {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 12px; font-weight: 700; letter-spacing: .06em;
+    padding: 5px 14px; border-radius: 999px; margin: 22px 0 14px;
+  }
+  .block-label:first-of-type { margin-top: 0; }
+  .b-tshirt { background: var(--accent-soft); color: var(--accent); }
+  .b-hair   { background: var(--warn-soft); color: var(--warn); }
+  .b-polo   { background: var(--green-soft); color: var(--green); }
+
+  .tl { list-style: none; }
+  .tl li {
+    display: grid;
+    grid-template-columns: 92px 1fr;
+    gap: 18px;
+    padding: 11px 0;
+    border-top: 1px solid var(--line);
+    align-items: start;
+  }
+  .tl li:first-child { border-top: none; }
+  .tl .time {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px; font-weight: 500; letter-spacing: .02em;
+    color: var(--ink); white-space: nowrap; padding-top: 1px;
+  }
+  .tl .time small { font-size: 12px; color: var(--ink-soft); }
+  .tl .what { font-size: 14.5px; font-weight: 700; }
+  .tl .detail { font-size: 12.5px; color: var(--ink-soft); font-weight: 400; margin-top: 2px; }
+  .tl .tag {
+    display:inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: .04em;
+    padding: 1px 8px; border-radius: 3px; margin-left: 8px; vertical-align: 1px;
+  }
+  .tag-tt { background: #2A2622; color: #fff; }
+  .tag-reel { background: var(--green); color: #fff; }
+  .tag-photo { background: #fff; color: var(--ink-soft); border: 1px solid var(--line); }
+  .tl .mark {
+    grid-column: 1 / -1;
+    margin-top: 4px; font-size: 12px; color: var(--warn); font-weight: 700;
+  }
+
+  /* ── Shot cards ── */
+  .shots { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .shot {
+    border: 1px solid var(--line); border-radius: 5px; padding: 16px 18px;
+  }
+  .shot.tt { border-top: 3px solid #2A2622; }
+  .shot.reel { border-top: 3px solid var(--green); }
+  .shot h3 { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+  .shot .place { font-size: 11.5px; color: var(--accent); font-weight: 700; margin-bottom: 10px; }
+  .shot ol { margin: 0 0 0 18px; padding: 0; }
+  .shot ol li { font-size: 12.5px; color: var(--ink-soft); margin-bottom: 4px; line-height: 1.55; }
+  .shot ol li b { color: var(--ink); font-weight: 700; }
+
+  /* ── Cast / crew ── */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+  .people { list-style: none; }
+  .people li { font-size: 13px; padding: 6px 0; border-bottom: 1px dashed var(--line); display:flex; justify-content:space-between; gap:12px;}
+  .people li:last-child { border-bottom: none; }
+  .people .role { color: var(--ink-soft); font-weight: 500; font-size: 11.5px; }
+  .people .name { font-weight: 700; text-align: right; }
+
+  /* ── Checklist ── */
+  .checklist { list-style: none; display: grid; gap: 7px; }
+  .checklist li {
+    font-size: 13px; padding: 8px 12px 8px 38px;
+    position: relative; border: 1px solid var(--line);
+    border-radius: 4px; line-height: 1.5;
+  }
+  .checklist li::before {
+    content: '□'; position: absolute; left: 12px;
+    color: var(--ink-soft); font-size: 14px;
+  }
+  .checklist li b { font-weight: 700; }
+  .checklist li span { color: var(--ink-soft); font-size: 11.5px; margin-left: 6px; }
+  .person-block { margin-bottom: 20px; }
+  .person-block:last-child { margin-bottom: 0; }
+  .person-name {
+    font-size: 13px; font-weight: 700; letter-spacing: .04em;
+    margin-bottom: 9px; padding-bottom: 6px;
+    border-bottom: 1px solid var(--line);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .person-name .badge {
+    font-size: 10px; font-weight: 700; padding: 2px 8px;
+    border-radius: 999px; letter-spacing: .04em;
+  }
+  .badge-model-f { background: var(--green-soft); color: var(--green); }
+  .badge-model-m { background: var(--accent-soft); color: var(--accent); }
+  .badge-client  { background: #EEE; color: var(--ink-soft); }
+
+  /* ── NG / rules ── */
+  .rules { list-style: none; display: grid; gap: 9px; }
+  .rules li { font-size: 13px; padding-left: 26px; position: relative; line-height: 1.55; }
+  .rules li.ok::before  { content: '✓'; position:absolute; left:4px; color: var(--green); font-weight:700; }
+  .rules li.ng::before  { content: '×'; position:absolute; left:5px; color: var(--warn); font-weight:700; }
+
+  .note {
+    background: var(--accent-soft); border-left: 3px solid var(--accent);
+    padding: 12px 16px; border-radius: 0 4px 4px 0; font-size: 12.5px;
+    color: var(--ink); margin-top: 14px; line-height: 1.6;
+  }
+  .note b { font-weight: 700; }
+
+  footer {
+    padding: 18px 40px; font-size: 11px; color: var(--ink-soft);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 600px) {
+    body { padding: 16px 8px 60px; }
+    header, section, footer { padding-left: 22px; padding-right: 22px; }
+    .date-badge { position: static; text-align: left; margin-top: 14px; }
+    .date-badge .d { font-size: 26px; }
+    .shots, .grid2 { grid-template-columns: 1fr; }
+    .tl li { grid-template-columns: 74px 1fr; gap: 12px; }
+    header h1 { font-size: 22px; }
+  }
+
+  /* ── Print ── */
+  @media print {
+    body { background: #fff; padding: 0; }
+    .sheet { border: none; max-width: 100%; }
+    section { break-inside: avoid; }
+    .shot, .tl li { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <header>
+    <div class="kicker en">M&Lee × LINK — Shooting Schedule</div>
+    <h1>M&Lee 撮影 当日タイムスケジュール</h1>
+    <div class="date-badge">
+      <div class="d en">06 / 27</div>
+      <div class="w">SAT.</div>
+    </div>
+    <div class="meta">
+      <div><span class="lbl">撮影場所</span><span class="val">Cocomio（ココミオ）のみ</span></div>
+      <div><span class="lbl">商品</span><span class="val">Tシャツ 6点 / ポロシャツ 1点</span></div>
+      <div><span class="lbl">動画尺</span><span class="val">1本 11〜15秒</span></div>
+    </div>
+  </header>
+
+  <!-- ── タイムライン ── -->
+  <section>
+    <div class="sec-title">当日の流れ</div>
+
+    <div class="block-label b-tshirt">◆ 第1部　Tシャツ撮影</div>
+    <ul class="tl">
+      <li>
+        <div class="time en">9:00</div>
+        <div>
+          <div class="what">集合・搬入・セッティング</div>
+          <div class="detail">機材設営／商品（Tシャツ6点）・M&Leeトートの準備／撮影位置の確認</div>
+        </div>
+      </li>
+      <li>
+        <div class="time en">9:15</div>
+        <div>
+          <div class="what">Tシャツ 単体撮影<span class="tag tag-tt">TikTok</span></div>
+          <div class="detail">テーブル／平らな場所。①トートから1枚ずつ出てくる → ②全6点出揃う → ③1枚ごとの柄・素材感カット → ④1枚ずつトートに戻る</div>
+        </div>
+      </li>
+      <li>
+        <div class="time en">10:00</div>
+        <div>
+          <div class="what">Tシャツ 着用リール撮影<span class="tag tag-reel">Reel</span></div>
+          <div class="detail">無地壁（コンクリ／木材）前。最初テンポよく切り替え → 後半それぞれゆっくりカット。画角は参考動画と同じ。<b>女性モデル</b></div>
+        </div>
+      </li>
+      <li>
+        <div class="time en">10:30</div>
+        <div>
+          <div class="what">Tシャツ 着用スチル撮影<span class="tag tag-photo">写真</span></div>
+          <div class="detail">サイズ感がわかる写真。<b>女性のみ・6点</b>。単体カットでOK</div>
+        </div>
+      </li>
+      <li>
+        <div class="time en">10:45</div>
+        <div>
+          <div class="what">第1部 完了 → 美容院へ移動</div>
+        </div>
+      </li>
+    </ul>
+
+    <div class="block-label b-hair">◆ ヘアセット（中断）</div>
+    <ul class="tl">
+      <li>
+        <div class="time en">11:00<br><small>〜12:00</small></div>
+        <div>
+          <div class="what">美容院でヘアセット</div>
+          <div class="detail">モデルのヘアセット（11:00 予約）。終了後 Cocomio に戻る</div>
+        </div>
+      </li>
+    </ul>
+
+    <div class="block-label b-polo">◆ 第2部　ポロシャツ撮影</div>
+    <ul class="tl">
+      <li>
+        <div class="time en">12:15</div>
+        <div>
+          <div class="what">再集合・ポロ撮影セッティング</div>
+          <div class="detail">男女2名スタンバイ／ロケーション・動線の確認</div>
+        </div>
+      </li>
+      <li>
+        <div class="time en">12:30</div>
+        <div>
+          <div class="what">ポロシャツ 着用リール撮影<span class="tag tag-reel">Reel</span></div>
+          <div class="detail">テーマ「日常に一息の休息」＋大分発ブランド。男女が別方向から目的地へ → 合流 → 休息するストーリー。引き画中心</div>
+        </div>
+      </li>
+      <li>
+        <div class="time en">14:00</div>
+        <div>
+          <div class="what">ポロシャツ 単体撮影<span class="tag tag-tt">TikTok</span></div>
+          <div class="detail">Cocomio 館内でハンガーに吊るし、いろんなカット。ロゴが見えるアングルを必ず押さえる</div>
+        </div>
+      </li>
+      <li>
+        <div class="time en">14:30</div>
+        <div>
+          <div class="what">ポロシャツ 着用スチル撮影<span class="tag tag-photo">写真</span></div>
+          <div class="detail">サイズ感がわかる写真。<b>男女両方</b>。屋外が難しければ室内で</div>
+        </div>
+      </li>
+      <li>
+        <div class="time en">15:00</div>
+        <div>
+          <div class="what">撮影完了・撤収</div>
+          <div class="detail">素材チェック → 莉穂さんへ受け渡し方法の確認</div>
+        </div>
+      </li>
+    </ul>
+    <div class="note">
+      <b>時間はすべて目安です。</b>モデル（旦那さん）が夕方に予定あり。巻き気味で進め、第2部を優先して確実に押さえます。雨風が激しくなければ、ポロは資料イメージ通り <b>外からの引き画</b> も狙います。
+    </div>
+  </section>
+
+  <!-- ── 撮る4本 ── -->
+  <section>
+    <div class="sec-title">撮影する4本＋着用スチル</div>
+    <div class="shots">
+      <div class="shot tt">
+        <h3>① Tシャツ 単体 <span class="tag tag-tt">TikTok</span></h3>
+        <div class="place">テーブル／平らな場所</div>
+        <ol>
+          <li><b>1.</b> トート（M&Lee）から1枚ずつ出てくる</li>
+          <li><b>2.</b> 全6点が出揃う</li>
+          <li><b>3.</b> 1枚ごとに柄・素材感がわかるカット</li>
+          <li><b>4.</b> 1枚ずつトートに戻っていく</li>
+        </ol>
+      </div>
+      <div class="shot reel">
+        <h3>② Tシャツ 着用 <span class="tag tag-reel">Reel</span></h3>
+        <div class="place">無地壁（コンクリ／木材）</div>
+        <ol>
+          <li>最初はテンポよく次々切り替え</li>
+          <li>後半はそれぞれゆっくりめのカット</li>
+          <li>画角は参考動画と合わせる</li>
+          <li>女性モデル着用</li>
+        </ol>
+      </div>
+      <div class="shot tt">
+        <h3>③ ポロシャツ 単体 <span class="tag tag-tt">TikTok</span></h3>
+        <div class="place">Cocomio 館内</div>
+        <ol>
+          <li>館内でハンガーに吊るす</li>
+          <li>ロゴが見えるカットを必ず入れる</li>
+          <li>いろんなアングルで素材感を</li>
+        </ol>
+      </div>
+      <div class="shot reel">
+        <h3>④ ポロシャツ 着用 <span class="tag tag-reel">Reel</span></h3>
+        <div class="place">屋外〜休息スポット</div>
+        <ol>
+          <li>男女が別方向から目的地へ歩く</li>
+          <li>合流（出会い）</li>
+          <li>同じ場所で休息・会話</li>
+          <li>街・風景を間に挟むのもOK</li>
+        </ol>
+      </div>
+    </div>
+    <div class="note">
+      <b>着用スチル：</b>Tシャツ＝女性のみ6点／ポロシャツ＝男女両方。いずれもサイズ感がわかる単体写真でOK（編集は莉穂さん側）。
+    </div>
+  </section>
+
+  <!-- ── 出演・スタッフ ── -->
+  <section>
+    <div class="grid2">
+      <div>
+        <div class="sec-title">出演・スタッフ</div>
+        <ul class="people">
+          <li><span class="role">撮影</span><span class="name">ハル</span></li>
+          <li><span class="role">立ち会い</span><span class="name">下田 秀一さん</span></li>
+          <li><span class="role">モデル（女性）</span><span class="name">莉穂さんの姉</span></li>
+          <li><span class="role">モデル（男性）</span><span class="name">姉の旦那さん</span></li>
+        </ul>
+      </div>
+      <div>
+        <div class="sec-title">移動・段取りメモ</div>
+        <ul class="people">
+          <li><span class="role">モデル移動</span><span class="name">旦那さんの運転</span></li>
+          <li><span class="role">美容院予約</span><span class="name">11:00〜</span></li>
+          <li><span class="role">旦那さん</span><span class="name">夕方に予定あり</span></li>
+          <li><span class="role">衣装</span><span class="name">レンタル（返却期限あり）</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 持ち物リスト（ハル以外） ── -->
+  <section>
+    <div class="sec-title">持ち物リスト（ハル以外）</div>
+
+    <div class="person-block">
+      <div class="person-name">
+        モデル（女性）— 莉穂さんの姉
+        <span class="badge badge-model-f">第1部・第2部</span>
+      </div>
+      <ul class="checklist">
+        <li>無地インナー（薄手・首元が目立たないもの）<span>Tシャツ・ポロの下に着るもの</span></li>
+        <li>着替え（私服）<span>撮影前後の移動用</span></li>
+        <li>靴<span>動きやすく・服と合うもの</span></li>
+        <li>ヘアピン・ヘアゴム類<span>美容院後のセット崩れ対策</span></li>
+        <li>タオル・ハンカチ<span>汗・雨対応</span></li>
+      </ul>
+    </div>
+
+    <div class="person-block">
+      <div class="person-name">
+        モデル（男性）— 旦那さん
+        <span class="badge badge-model-m">第2部のみ</span>
+      </div>
+      <ul class="checklist">
+        <li>無地インナー（薄手・白または黒）<span>ポロシャツの下に着るもの</span></li>
+        <li>着替え（私服）<span>撮影前後の移動用</span></li>
+        <li>靴<span>動きやすく・服と合うもの</span></li>
+        <li>タオル・ハンカチ<span>汗・雨対応</span></li>
+      </ul>
+    </div>
+
+    <div class="person-block">
+      <div class="person-name">
+        下田 秀一さん
+        <span class="badge badge-client">立ち会い</span>
+      </div>
+      <ul class="checklist">
+        <li>衣装一式（Tシャツ 6点・ポロシャツ 1点・M&Leeトートバッグ）・ハンガー<span>当日現場に持ち込み</span></li>
+        <li>スマートフォン<span>素材受け取り・確認用</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── 撮影ルール・NG ── -->
+  <section>
+    <div class="sec-title">撮影ルール・NG（ポロ着用リール）</div>
+    <ul class="rules">
+      <li class="ng">手を繋ぐ・絡み合うのは<b>NG</b></li>
+      <li class="ok">同じベンチに座って話す・同じ道を歩くのは<b>OK</b></li>
+      <li class="ng">顔がっつり正面はNG（後ろ姿・横顔で）</li>
+      <li class="ok">顔がわからない遠目なら、正面からの構図もOK</li>
+      <li class="ok">テーマは「日常に一息の休息」＋さりげなく大分発ブランド</li>
+    </ul>
+  </section>
+
+  <footer>
+    <span>M&Lee 撮影タイムスケジュール</span>
+    <span class="en">2026.06.27 (SAT) ／ Cocomio</span>
+  </footer>
+
+</div>
+</body>
+</html>
